@@ -1,0 +1,38 @@
+*{
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    line-height: 1.6;
+    margin: 0;
+    background-color: burlywood;
+
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    */
+}
+
+a {
+    color: #34495e;
+    text-decoration: none;
+    /*
+      text-decoration: none - is used here to not show underlining under an anchor element when a mouse hovers over it.
+    */
+}
+
+p{
+    font-size: large;
+}
+
+@media (max-width:300px) {
+    *{
+        box-sizing: initial;
+    }
+}
+
+/*
+NB! Don't add anything else here unless there is no other way!
+*/
