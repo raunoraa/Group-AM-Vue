@@ -47,7 +47,7 @@ export default {
 
   @media (max-width:600px) {
     main{
-      height: 45vh;
+      height: 55vh;
     }
 
     .signupFooter{
@@ -57,7 +57,7 @@ export default {
 
   @media (max-width:380px) {
     main{
-      height: 35vh;
+      height: 50vh;
     }
   }
 

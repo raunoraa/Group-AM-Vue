@@ -104,4 +104,13 @@ li:active{
     color: black;
 }
 
+@media (max-width: 599px) {
+  .header{
+    padding: 0.3em;
+  }
+  li{
+    padding: 0.7em;
+  }
+}
+
 </style>
