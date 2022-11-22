@@ -43,8 +43,8 @@ export default {
       if(this.password.length<8 || this.password.length>15){
         this.validatePassword = "Password length must be between 8-15 characters!";
       } else {
-        let regex = /^(?=.*[A-ZÕÄÖÜ]+)(?=.*([a-zõäöü](.*)[a-zõäöü])+)(?=.*[0-9]+)(?=.*[_]+).*$/; // a little help: https://stackoverflow.com/questions/3533408/regex-i-want-this-and-that-and-that-in-any-order
-        this.validatePassword = regex.test(this.password) ? "" : "Password must contain at least one uppercase character (A-Z), two lowercase characters (a-z), one digits (0-9), and character _ !";
+        let regex = /^[A-ZÕÄÖÜ](?=.*([a-zõäöü](.*)[a-zõäöü])+)(?=.*[0-9]+)(?=.*[_]+).*$/; // a little help: https://stackoverflow.com/questions/3533408/regex-i-want-this-and-that-and-that-in-any-order
+        this.validatePassword = regex.test(this.password) ? "" : "Password must start with an uppercase character (A-Z), must have at least two lowercase characters (a-z), one digit (0-9), and character _ !";
       }
 
       if(this.validatePassword=="") this.$router.push('/mainpage'); //will redirect to the main page if the form is correctly filled
