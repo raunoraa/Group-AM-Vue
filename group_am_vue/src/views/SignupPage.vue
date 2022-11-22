@@ -99,6 +99,14 @@ export default {
     background: rgb(187, 16, 110);
     font-weight: bold;
     color: aliceblue;
+    cursor: pointer;
+  }
+  .submit:hover{
+    background: rgb(255, 25, 163);
+  }
+  .submit:active{
+    background: rgb(255, 141, 242);
+    color: black;
   }
 
   @media (min-width: 1000px) {
