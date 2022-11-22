@@ -62,7 +62,7 @@ export default {
     justify-content: center;
 
     width: 100%;
-    height: 80vh;
+    height: 70vh;
   }
 
   /*
@@ -83,6 +83,7 @@ export default {
     border-radius: 1em;
     padding: 4em;
     padding-top: 1.5em;
+    padding-bottom: 2em;
     background: rgb(0, 253, 164);
     max-width: 70%;
   }
@@ -93,7 +94,7 @@ export default {
   }
 
   .submit{
-    margin-top: 2em;
+    margin-top: 1.5em;
     padding: 0.5em;
     border-radius: 0.5em;
     background: rgb(187, 16, 110);
