@@ -5,16 +5,15 @@
     -->
     <main>
       <div class="formContainer">
-        <form>
-          <h2>Email</h2> <input type="email" v-model="email">
-          <h2>Password</h2> <input type="password" v-model="password">
-          <!-- <div v-if="errors.length" class="error"><b>Please correct the following error(s):</b>
-            <ul>
-              <li v-for="(error,index) in errors" v-bind:key="index" v-bind:error="error"> {{ error}} </li>
-            </ul>
-          </div> -->
+        <form @submit.prevent="validateForm" class="formContainerInner">
+          <label for="email">Email</label> <input type="email" required v-model="email" />
+          <label for="password">Password</label> <input type="password" required v-model="password" />
+          <div v-if="validatePassword" class="error">
+            {{validatePassword}}
+          </div>
+
           <div class="button">
-            <button class="submit" type="submit">Sign up</button>
+            <button class="submit" type="submit" >Sign up</button>
           </div>
         </form>
       </div>
@@ -30,49 +29,27 @@ export default {
   name: 'HomeView',
   components: {
     Footer
-  }
-
-    /* data: {  // currently commented out, causes weird errors
-      email: '',
-      password: '',
-      errors: [],
-    
   },
-
-  
+  data: function(){
+    return{
+      email: "",
+      password: "",
+      validatePassword: "",
+      isValid: false,
+    };
+  },
   methods: {
+    validateForm(){
+      if(this.password.length<8 || this.password.length>15){
+        this.validatePassword = "Password length must be between 8-15 characters!";
+      } else {
+        let regex = /^(?=.*[A-ZÕÄÖÜ]+)(?=.*([a-zõäöü](.*)[a-zõäöü])+)(?=.*[0-9]+)(?=.*[_]+).*$/; // a little help: https://stackoverflow.com/questions/3533408/regex-i-want-this-and-that-and-that-in-any-order
+        this.validatePassword = regex.test(this.password) ? "" : "Password must contain at least one uppercase character (A-Z), two lowercase characters (a-z), one digits (0-9), and character _ !";
+      }
 
-    checkErrors: function (e) {
-      this.errors = [];
-      if (this.password.length > 15 || this.password.length < 8)
-        this.errors.push('The password needs to be between 8 and 15 characters long!')
-      if (!this.password.includes("_"))
-        this.errors.push('The password should contain an underscore')
-      this.upperCaseCount = 0
-      this.lowerCaseCount = 0
-      this.numberCount = 0
-      for (i = 0; i < this.password.length; i++) {
-        if (i = 1 && upperCaseCount != 1)
-          this.errors.push('The password should start with an uppercase character!')
-        if (this.password[i].toLowerCase() == this.password[i] && this.password[i].toUpperCase() != this.password[i])
-          this.lowerCaseCount++
-        if (this.password[i].toUpperCase() == this.password[i] && this.password[i].toLowerCase() != this.password[i])
-          this.upperCaseCount++
-        if (!isNaN(this.password[i]))
-          this.numberCount++
-      }
-      if (this.upperCaseCount == 0)
-        this.errors.push('The password should contain at least 1 uppercase character')
-      if (lowerCaseCount < 3)
-        this.errors.push('The password should contain at least two lowercase characters')
-      if (numberCount == 0)
-        this.errors.push('The password should contain at least 1 numeric value')
-      if (this.errors.length == 0 ) {
-        return true;
-      }
+      if(this.validatePassword=="") this.$router.push('/mainpage'); //will redirect to the main page if the form is correctly filled
     }
-
-  } */
+  }
 }
 </script>
 
@@ -92,19 +69,105 @@ export default {
   Play around with height vh parameters to get the form in the right place responsively
   */
 
+  input{
+    margin-bottom: 1em;
+  }
+
+  .error{
+    overflow-wrap: break-word;
+    color: red;
+    font-weight: bold;
+  }
+
+  .formContainer{
+    border-radius: 1em;
+    padding: 4em;
+    padding-top: 1.5em;
+    background: rgb(0, 253, 164);
+    max-width: 70%;
+  }
+
+  .formContainerInner{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .submit{
+    margin-top: 2em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background: rgb(187, 16, 110);
+    font-weight: bold;
+    color: aliceblue;
+  }
+
+  @media (min-width: 1000px) {
+
+    label{
+      font-size: x-large;
+    }
+
+    input{
+      margin-top: 0.5em;
+      margin-bottom: 2em;
+      padding: 0.5em;
+    }
+
+    input[type=email]{
+      font-size: larger;
+    }
+
+    input[type=password]{
+      font-size: larger;
+    }
+
+    .submit{
+    font-size: larger;
+  }
+  }
+
+
+  .signupFooter{
+    position: fixed;
+    width: 100%;
+  }
+
   @media (max-height: 650px) {
     main{
       height: 65vh;
     }
+
+    .formContainer{
+    padding: 3em;
+    padding-top: 0.5em;
+  }
+
+  .submit{
+    margin-top: 1em;
+    padding: 0.25em;
+  }
+
   }
 
   @media (max-width:600px) {
-    main{
-      height: 55vh;
+      main{
+        height: 55vh;
+      }
+
+      .formContainer{
+      padding: 3em;
+      padding-top: 0.5em;
+      padding-bottom: 1.5em;
     }
 
-    .signupFooter{
-      position: relative;
+    .submit{
+      margin-top: 1em;
+      padding: 0.35em;
+    }
+
+    .error{
+      font-size: small;
+      overflow-wrap: normal;
     }
   }
 
@@ -112,16 +175,10 @@ export default {
     main{
       height: 50vh;
     }
-  }
 
-  .formContainer{
-    background: rgb(0, 253, 164);
-  }
-
-
-  .signupFooter{
-    position: fixed;
-    width: 100%;
+    .formContainer{
+      padding: 1em;
+    }
   }
 
 
